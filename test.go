@@ -33,7 +33,7 @@ func calculateForRoman(num1, num2, sign string) string {
 	number1 := convertFromRomanToArab(num1)
 	number2 := convertFromRomanToArab(num2)
 
-	if checkNumber(number1) && checkNumber(number2) {
+	if checkRespondNumber(number1) && checkRespondNumber(number2) {
 
 		switch sign {
 		case "+":
@@ -46,13 +46,13 @@ func calculateForRoman(num1, num2, sign string) string {
 			if number2 != 0 {
 				result = number1 / number2
 			} else {
-				panic("Ошибка! Введены числа больше 10")
+				panic("Ошибка! На ноль делить нельзя")
 			}
 		default:
 			panic("Ошибка! Введены некорректные данные")
 		}
 	} else {
-		panic("Введены числа больше 10")
+		panic("Введены числа, не в диапазоне от 1 до 10")
 	}
 	if result <= 0 {
 		panic("Ошибка! Некорректный результат")
@@ -76,7 +76,7 @@ func calculateForArab(num1, num2, sign string) int {
 		panic("Ошибка! Введены некорректные данные")
 	}
 
-	if checkNumber(number1) && checkNumber(number2) {
+	if checkRespondNumber(number1) && checkRespondNumber(number2) {
 		switch sign {
 		case "+":
 			result = number1 + number2
@@ -88,13 +88,13 @@ func calculateForArab(num1, num2, sign string) int {
 			if number1/number2 != 0 {
 				result = number1 / number2
 			} else {
-				panic("Ошибка! Введены некорректные данные")
+				panic("Ошибка! На ноль делить нельзя!")
 			}
 		default:
 			panic("Ошибка! Некорректный знак")
 		}
 	} else {
-		panic("Введены числа больше 10")
+		panic("Введены числа, не в диапазоне от 1 до 10")
 	}
 	return result
 }
@@ -154,6 +154,10 @@ func IsLetter(s string) bool {
 	return true
 }
 
-func checkNumber(number int) bool {
-	return number <= 10
+func checkRespondNumber(number int) bool {
+	if number > 10 || number == 0 {
+		return false
+	} else {
+		return true
+	}
 }
